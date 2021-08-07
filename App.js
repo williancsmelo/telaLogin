@@ -8,31 +8,52 @@ import {
   Button,
   Image,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  Linking
 } from 'react-native'
 
 const fundo = 'white'
 
 export default function App() {
-  clickLogin = () => {
-    Alert.alert('Solicitando login', 'Login...')
-  }
-  clickSignup = () => {
-    Alert.alert('Criando conta', 'Criar conta...')
-  }
-
   return (
     <View style={styles.main}>
       <View style={styles.logo}>
-        <Image source={require('./assets/logo.png')} />
+        <Image
+        resizeMode='contain'
+        style={{
+          height:150,
+          width:150,
+          justifyContent:'center',
+          alignItems:'center',
+        }}
+        source={require('./assets/logo.png')}/>
       </View>
 
       <View style={styles.container}>
+        <View style={styles.viewTextEntrar}>
+          <Text style={{
+            fontSize:35,
+            fontWeight:'bold',
+          }}>Entrar no </Text>
+          <Text
+          style={{
+            fontSize:33,
+            fontWeight:'bold',
+            color:'#F69E44'
+          }}>Pro</Text>
+          <Text
+          style={{
+            fontSize:33,
+            fontWeight:'bold',
+            color:'#8A348B'
+          }}>Inclusão</Text>
+        </View>
+
         <TextInput
           style={styles.input}
           placeholder="Email"
           autoCorrect={false}
-          onChangeText={() => {}}
+          onChangeText={ () => {}}
         />
 
         <TextInput
@@ -43,23 +64,29 @@ export default function App() {
           onChangeText={() => {}}
         />
 
-        <View style={styles.buttons}>
           <TouchableOpacity
-            style={styles.login}
-            onPress={() => {
-              this.clickLogin()
-            }}
-          >
-            <Text style={styles.logintext}>Acessar</Text>
+            onPress={()=>Alert.alert("Login","...")}
+            style={styles.login}>
+              <Text style={{
+                fontSize:16,
+                color:'white',
+              }}>Acessar</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.signup}
-          onPress={() => {
-            this.clickSignup()
-          }}>
-            <Text style={styles.signuptext}>Criar conta</Text>
-          </TouchableOpacity>
-        </View>
+          <View style={styles.noLogin}>
+            <Text
+            onPress={()=>Alert.alert("Criar conta","...")}
+            style={{
+              color: 'blue',
+              textDecorationLine: 'underline',
+            }}>Não possui conta?</Text>
+            <Text
+            onPress={()=>Alert.alert("Esqueceu sua senha","...")} 
+            style={{
+              color: 'blue',
+              textDecorationLine: 'underline'
+            }}>Esqueceu sua senha?</Text>
+          </View>
       </View>
     </View>
   )
@@ -67,55 +94,59 @@ export default function App() {
 
 const styles = StyleSheet.create({
   main: {
-    flex: 1,
-    backgroundColor: fundo,
+    flex:1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'flex-start'
   },
 
   logo: {
-    flex: 1,
-    justifyContent: 'flex-end'
+    alignItems: 'center',
+    marginTop: 70,
+    marginBottom:60
   },
+
   container: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    width: '90%'
+    width: '80%',
   },
+
+  viewTextEntrar:{
+    marginBottom:10,
+    width:'100%',
+    justifyContent:'center',
+    flexDirection:'row'
+  },
+
   input: {
     backgroundColor: 'white',
-    width: '90%',
+    width:'100%',
     borderRadius: 7,
-    marginBottom: 15,
+    marginBottom: 7,
     color: '#222',
-    fontSize: 15,
+    fontSize: 18,
     padding: 10,
     borderColor: 'black',
     borderWidth: 1,
     justifyContent: 'center',
-    //paddingVertical: 15,
-    bottom: '10%'
-  },
-
-  buttons: {
-    bottom: '5%',
-    flexDirection: 'row',
-    width: '90%',
-    justifyContent: 'space-around'
+    paddingVertical: 15,
   },
 
   login: {
     backgroundColor: 'purple',
-    height: 40,
-    width: '45%',
+    width:'100%',
+    height:50,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 7
+    borderRadius: 7,
+    marginTop:9
   },
 
-  logintext: {
-    color: 'white'
+  noLogin:{
+    flexDirection:'row',
+    marginTop:18,
+    justifyContent:'space-between',
+    width:'100%'
   },
 
   signup: {
@@ -128,6 +159,7 @@ const styles = StyleSheet.create({
     borderColor: 'purple',
     borderWidth: 1
   },
+
   signuptext: {
     color: 'purple'
   }
